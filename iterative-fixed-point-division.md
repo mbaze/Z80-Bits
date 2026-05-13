@@ -100,9 +100,9 @@ rra
 rra
 ```
 
-The %11111100 mask is introduced because, on the Z80, an AND followed by two RRA instructions is both shorter
-and fasterthan performing two SRL A operations. Since RRA rotates through the carry flag, unwanted upper bits
-are reintroduced during the shift. The mask clears them, effectively producing a logical two-bit shift.
+The `%11111100` mask is introduced because, on the Z80, an `and` followed by two `rra`s is both shorter
+and faster than performing two `srl a` operations. The mask clears the two least significant bits,
+ensuring that only zeros are shifted in during the `rra` sequence.
 
 ## Divisors of the form 2^N + 1
 
