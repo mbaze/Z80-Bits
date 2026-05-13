@@ -151,5 +151,6 @@ srl   a
 ## Closing Thoughts
 
 These routines are not replacements for general-purpose division. They are specialized iterative solvers
-for particular divisors, especially numbers near powers of two. But they form an interesting alternative
-to restoring division: instead of extracting quotient bits one at a time, they converge toward the quotient using only shifts, additions, complements, and feedback.
+for particular divisors, especially numbers near powers of two. But they represent an interesting and
+philosophically satisfying alternative to restoring division: instead of extracting quotient bits one at a time,
+they converge toward the quotient using only shifts, additions, complements, and feedback.
