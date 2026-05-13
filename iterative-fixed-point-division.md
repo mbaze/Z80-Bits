@@ -6,7 +6,7 @@ the most efficient choice for certain constant divisors. Instead of constructing
 the approach introduced here repeatedly refines an approximation using only additions and shifts. The quotient
 emerges through successive iteration because it is a stable fixed point of the recursive equation.
 
-To explain the idea, let’s consider division by 3:
+To explain the idea, letâ€™s consider division by 3:
 
 y = x / 3
 
@@ -32,22 +32,22 @@ On the Z80, division by 4 is simply a two-bit right shift, so we can repeatedly 
 
 y = (x + y) >> 2
 
-starting from some initial estimate.
-
 The remarkable part is that the error shrinks very quickly. Every iteration divides the remaining error by 4,
-so each pass contributes roughly two additional bits of precision to the quotient. In effect, the iteration computes
-the reciprocal through a geometric expansion:
+so each pass contributes roughly two additional bits of precision to the quotient. In effect, the iteration
+computes the reciprocal through a geometric expansion:
 
 1 / 3 = 1 / 4 + 1 / 16 + 1 / 64 + ...
 
-where each iteration contributes another term of the expansion. For an 8-bit dividend, four iterations are enough
-to produce an arithmetically exact integer quotient over the entire range. For a 16-bit dividend, eight iterations suffice.
+where each iteration contributes another term of the expansion. For an 8-bit dividend, four iterations are
+enough to produce an arithmetically exact integer quotient over the entire range. For a 16-bit dividend,
+eight iterations suffice.
 
-One subtle issue remains: every time we shift right, we throw away fractional information. Left unchecked, these tiny
-losses accumulate and the final result drifts low. The solution is to preload the accumulator with a carefully chosen
-constant before iteration begins. This initial bias acts like a reservoir of fractional carry information. As the iterations
-proceed and the value is repeatedly shifted down, the preload leaks into the result, compensating for the truncation errors
-introduced by the shifts. For an 8-bit dividend, the constant is 256 / 3. For a 16-bit dividend, it is 65536 / 3.
+One subtle issue remains: every time we shift right, we throw away fractional information. Left unchecked,
+these tiny losses accumulate and the final result drifts low. The solution is to preload the accumulator
+with a carefully chosen constant before iteration begins. This initial bias acts like a reservoir of fractional
+carry information. As the iterations proceed and the value is repeatedly shifted down, the preload leaks into
+the result, compensating for the truncation errors introduced by the shifts. For an 8-bit dividend, the constant
+is 256 / 3. For a 16-bit dividend, it is 65536 / 3.
 
 The resulting Z80 implementation for division by 3 is remarkably compact:
 
