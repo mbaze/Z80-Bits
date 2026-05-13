@@ -37,16 +37,15 @@ computes the reciprocal through a geometric expansion:
 
 1 / 3 = 1 / 4 + 1 / 16 + 1 / 64 + ...
 
-where each iteration contributes another term of the expansion. For an 8-bit dividend, four iterations are
-enough to produce an arithmetically exact integer quotient over the entire range. For a 16-bit dividend,
+where each iteration contributes another term of the expansion. For 8-bit dividends, four iterations
+are sufficient to reproduce the exact integer quotient over the entire range. For 16-bit dividends,
 eight iterations suffice.
 
 One subtle issue remains: every time we shift right, we throw away fractional information. Left unchecked,
 these tiny losses accumulate and the final result drifts low. The solution is to preload the accumulator
-with a carefully chosen constant before iteration begins. This initial bias acts like a reservoir of fractional
-carry information. As the iterations proceed and the value is repeatedly shifted down, the preload leaks into
-the result, compensating for the truncation errors introduced by the shifts. For an 8-bit dividend, the constant
-is 256 / 3. For a 16-bit dividend, it is 65536 / 3.
+with a carefully chosen constant before iteration begins. The preload biases the iteration upward to compensate
+for the downward truncation introduced by repeated right shifts. For an 8-bit dividend, the preload constant
+is floor(256 / 3). For a 16-bit dividend, it is floor(65536 / 3).
 
 The resulting Z80 implementation for division by 3 (A = B / 3) is remarkably compact:
 
@@ -99,8 +98,9 @@ rra
 rra
 ```
 
-The `%11111110` mask is used because it clears the least significant bit and resets the carry flag.
-On the Z80, this allows the use of fast `rra` instructions instead of a pair of slower `srl a` operations.
+The `%11111110` mask is used because it clears the least significant bit and resets the carry flag,
+ensuring that subsequent `rra` instructions behave like chained logical shifts, which would otherwise
+require slower `srl a` operations.
 
 ## Divisors of the form 2^N + 1
 
