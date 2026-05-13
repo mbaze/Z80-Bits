@@ -78,7 +78,7 @@ It turns out that the recursive equation has a particularly elegant form for div
 ...
 ```
 
-For instance, division by 7 becomes:
+For instance, division by 7 (A = B / 7) becomes:
 
 ```
 ld    c,%11111100
@@ -130,7 +130,7 @@ On the Z80 we can exploit the identity:
 
 because complement (`cpl`) is cheaper than negation (`neg`).
 The additional increment can be absorbed by pre-incrementing the input value before iteration begins.
-The resulting division-by-5 routine becomes:
+The resulting division-by-5 (A = B / 5) routine becomes:
 
 ```
 ld    a,b
