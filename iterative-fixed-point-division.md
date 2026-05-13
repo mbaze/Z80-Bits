@@ -31,21 +31,19 @@ by 4 is simply a two-bit right shift, so we can repeatedly apply:
 
 y = (x + y) >> 2
 
-The remarkable part is that the error shrinks very quickly. Every iteration divides the remaining error by 4,
-so each pass contributes roughly two additional bits of precision to the quotient. In effect, the iteration
-computes the reciprocal through a geometric expansion:
+The useful part is that each iteration divides the remaining error by about 4, so the approximation improves quickly.
+The iteration behaves like building the reciprocal through a geometric expansion:
 
 1 / 3 = 1 / 4 + 1 / 16 + 1 / 64 + ...
 
-where each iteration contributes another term of the expansion. For 8-bit dividends, four iterations
-are sufficient to reproduce the exact integer quotient over the entire range. For 16-bit dividends,
-eight iterations suffice.
+where each pass contributes another term of the series. Even with integer truncation at each step, four iterations
+are enough to produce the correct integer quotient over the entire 8-bit range. For 16-bit inputs, eight iterations
+suffice.
 
-One subtle issue remains: every time we shift right, we throw away fractional information. Left unchecked,
-these tiny losses accumulate and the final result drifts low. The solution is to preload the accumulator
-with a carefully chosen constant before iteration begins. The preload biases the iteration upward to compensate
-for the downward truncation introduced by repeated right shifts. For an 8-bit dividend, the preload constant
-is floor(256 / 3). For a 16-bit dividend, it is floor(65536 / 3).
+One subtle issue remains: every time we shift right, we lose the fractional part of the value. This introduces a small
+downward bias which can be offset by preloading the accumulator with a carefully chosen constant. The constant shifts
+the iteration upward so that the truncated process converges to the correct result. For an 8-bit dividend, the preload
+constant is floor(256 / 3). For a 16-bit dividend, it is floor(65536 / 3).
 
 The resulting Z80 implementation for division by 3 (A = B / 3) is remarkably compact:
 
