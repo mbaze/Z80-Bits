@@ -111,17 +111,19 @@ At first glance, this looks almost identical to the addition-based recurrence of
 However, there is an important difference: unlike the addition form, the truncation error now oscillates in sign,
 so the rounding bias tends to cancel out naturally and no preload constant is required.
 
-For example, division by 5 can be implemented directly as:
+For example, division by 5 can be implemented by repeating:
 
 y = (x - y) >> 2
 
-On the Z80 we can exploit the identity:
+However, on the Z80, the expression (x - y) is not as straightforward to implement as (y + x), at least not without
+using temporary storage. Fortunately, this operation can be rewritten in a form that avoids explicit subtraction.
+We can exploit the identity:
 
 -y = ~y + 1
 
-because complement (`cpl`) is cheaper than negation (`neg`).
-The additional increment can be absorbed by pre-incrementing the input value before iteration begins.
-The resulting routine that performs division by 5 (A = B / 5) becomes:
+since bitwise complement (`cpl`) is cheaper than arithmetic negation (`neg`). The additional increment can be
+absorbed by pre-incrementing the input value before iteration begins. The resulting routine that performs division
+by 5 (A = B / 5) becomes:
 ```
 ld    a,b
 inc   b
