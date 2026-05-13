@@ -46,7 +46,6 @@ the iteration upward so that the truncated process converges to the correct resu
 constant is floor(256 / 3). For a 16-bit dividend, it is floor(65536 / 3).
 
 The resulting Z80 implementation for division by 3 (A = B / 3) is remarkably compact:
-
 ```
 ld    a,256 / 3
 add   a,b
@@ -66,7 +65,6 @@ srl   a
 ## Generalizing the idea to divisors of the form 2^N - 1
 
 It turns out that the recursive equation has a particularly elegant form for divisors that are one less than a power of two:
-
 ```
  3: y = (x + y) >> 2
  7: y = (x + y) >> 3
@@ -75,7 +73,6 @@ It turns out that the recursive equation has a particularly elegant form for div
 ```
 
 For instance, division by 7 (A = B / 7) becomes:
-
 ```
 ld    c,%11111110
 ld    a,256 / 7
@@ -103,7 +100,6 @@ require slower `srl a` operations.
 ## Divisors of the form 2^N + 1
 
 Another class of elegant routines emerges for divisors that are one greater than a power of two:
-
 ```
  5: y = (x - y) >> 2
  9: y = (x - y) >> 3
@@ -125,8 +121,7 @@ On the Z80 we can exploit the identity:
 
 because complement (`cpl`) is cheaper than negation (`neg`).
 The additional increment can be absorbed by pre-incrementing the input value before iteration begins.
-The resulting division-by-5 (A = B / 5) routine becomes:
-
+The resulting routine that performs division by 5 (A = B / 5) becomes:
 ```
 ld    a,b
 inc   b
