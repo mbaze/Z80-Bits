@@ -1,5 +1,8 @@
 # A New Class of Division Routines on the Zilog Z80: Iterative Fixed-Point Division
 
+Author: Milos "baze" Bazelides
+Date: 2026-05-13
+
 Most Z80 division routines use some variation of restoring division: a bit-by-bit algorithm that repeatedly
 shifts, subtracts, and restores partial remainders. It is reliable and well understood, but it is not always
 the most efficient choice for certain constant divisors. Instead of constructing the quotient one bit at a time,
