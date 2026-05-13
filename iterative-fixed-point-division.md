@@ -22,7 +22,7 @@ then:
 
 and finally:
 
-y = (y + x) / 4
+y = (x + y) / 4
 
 That equation is recursive: the value we are trying to compute appears on both sides. This turns out to be exactly
 what we want. If the current estimate is too small, the next iteration becomes larger; if it is too large, the next
@@ -99,8 +99,8 @@ rra
 rra
 ```
 
-The 11111110 mask is used because it clears the least significant bit and resets the carry flag. On the Z80, this allows
-a subsequent pair of fast `rra` instructions to be used instead of two slower `srl a` operations.
+The `%11111110` mask is used because it clears the least significant bit and resets the carry flag.
+On the Z80, this allows the use of fast `rra` instructions instead of a pair of slower `srl a` operations.
 
 ## Divisors of the form 2^N + 1
 
