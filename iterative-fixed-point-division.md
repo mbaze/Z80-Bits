@@ -99,7 +99,8 @@ rra
 rra
 ```
 
-The 11111110 mask is used because it clears the least significant bit and resets the carry flag. On the Z80, this allows a subsequent pair of fast `rra` instructions to be used instead of two slower `srl a` operations.
+The 11111110 mask is used because it clears the least significant bit and resets the carry flag. On the Z80, this allows
+a subsequent pair of fast `rra` instructions to be used instead of two slower `srl a` operations.
 
 ## Divisors of the form 2^N + 1
 
@@ -113,9 +114,8 @@ Another class of elegant routines emerges for divisors that are one greater than
 ```
 
 At first glance, this looks almost identical to the addition-based recurrence of the form y = (x + y) >> N.
-However, there is an important difference: the sign of the feedback term is now negative. Unlike the addition form,
-the truncation error now oscillates in sign, so the rounding bias tends to cancel out naturally and no positive
-preload constant is required.
+However, there is an important difference: unlike the addition form, the truncation error now oscillates in sign,
+so the rounding bias tends to cancel out naturally and no preload constant is required.
 
 For example, division by 5 can be implemented directly as:
 
