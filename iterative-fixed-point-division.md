@@ -124,7 +124,11 @@ For example, division by 5 can be implemented directly as:
 
 y = (x - y) >> 2
 
-On the Z80 we can also exploit the identity ~y = -y - 1 because complement (CPL) is cheaper than negation (NEG).
+On the Z80 we can exploit the identity:
+
+~y = -y - 1
+
+because complement (`cpl`) is cheaper than negation (`neg`).
 The additional increment can be absorbed by pre-incrementing the input value before iteration begins.
 The resulting division-by-5 routine becomes:
 
