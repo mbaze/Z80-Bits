@@ -83,7 +83,7 @@ It turns out that the recursive equation has a particularly elegant form for div
 For instance, division by 7 (A = B / 7) becomes:
 
 ```
-ld    c,%11111100
+ld    c,%11111110
 ld    a,256 / 7
 add   a,b
 rra
@@ -102,9 +102,7 @@ rra
 rra
 ```
 
-The `%11111100` mask is introduced because, on the Z80, an `and` followed by two `rra`s is both shorter
-and faster than performing two `srl a` operations. The mask clears the two least significant bits,
-ensuring that only zeros are shifted in during the `rra` sequence.
+The 11111110 mask is used because it clears the least significant bit and resets the carry flag. On the Z80, this allows a subsequent pair of fast `rra` instructions to be used instead of two slower `srl a` operations.
 
 ## Divisors of the form 2^N + 1
 
