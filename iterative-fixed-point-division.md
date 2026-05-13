@@ -98,11 +98,6 @@ rra
 and   c
 rra
 rra
-add   a,b
-rra
-and   c
-rra
-rra
 ```
 
 The %11111100 mask is introduced because, on the Z80, an AND followed by two RRA instructions is both shorter
