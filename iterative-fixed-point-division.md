@@ -71,10 +71,12 @@ srl   a
 
 It turns out that the recursive equation has a particularly elegant form for divisors that are one less than a power of two:
 
+```
 3:  y = (x + y) >> 2
 7:  y = (x + y) >> 3
 15: y = (x + y) >> 4
 ...
+```
 
 For instance, division by 7 becomes:
 
@@ -111,10 +113,12 @@ are reintroduced during the shift. The mask clears them, effectively producing a
 
 Another class of elegant routines emerges for divisors that are one greater than a power of two:
 
+```
 5:  y = (x - y) >> 2
 9:  y = (x - y) >> 3
 17: y = (x - y) >> 4
 ...
+```
 
 At first glance, this looks almost identical to the addition-based recurrence of the form y = (x + y) >> N.
 However, there is an important difference: the sign of the feedback term is now negative. Unlike the addition form,
