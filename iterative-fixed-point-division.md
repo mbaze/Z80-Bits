@@ -126,7 +126,7 @@ y = (x - y) >> 2
 
 On the Z80 we can exploit the identity:
 
-~y = -y - 1
+-y = ~y + 1
 
 because complement (`cpl`) is cheaper than negation (`neg`).
 The additional increment can be absorbed by pre-incrementing the input value before iteration begins.
