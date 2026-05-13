@@ -49,7 +49,7 @@ carry information. As the iterations proceed and the value is repeatedly shifted
 the result, compensating for the truncation errors introduced by the shifts. For an 8-bit dividend, the constant
 is 256 / 3. For a 16-bit dividend, it is 65536 / 3.
 
-The resulting Z80 implementation for division by 3 is remarkably compact:
+The resulting Z80 implementation for division by 3 (A = B / 3) is remarkably compact:
 
 ```
 ld    a,256 / 3
