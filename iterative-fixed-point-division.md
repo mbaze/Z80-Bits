@@ -71,8 +71,8 @@ srl   a
 It turns out that the recursive equation has a particularly elegant form for divisors that are one less than a power of two:
 
 ```
-3:  y = (x + y) >> 2
-7:  y = (x + y) >> 3
+ 3: y = (x + y) >> 2
+ 7: y = (x + y) >> 3
 15: y = (x + y) >> 4
 ...
 ```
@@ -106,8 +106,8 @@ The 11111110 mask is used because it clears the least significant bit and resets
 Another class of elegant routines emerges for divisors that are one greater than a power of two:
 
 ```
-5:  y = (x - y) >> 2
-9:  y = (x - y) >> 3
+ 5: y = (x - y) >> 2
+ 9: y = (x - y) >> 3
 17: y = (x - y) >> 4
 ...
 ```
