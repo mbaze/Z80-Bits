@@ -24,14 +24,14 @@ and finally:
 
 $y = (x + y) / 4$
 
-That equation is recursive: the value we are trying to compute appears on both sides. This is useful because
-repeated iteration drives the estimate toward the unique fixed point $y = x / 3$. If the current estimate is too small,
-the next iteration becomes larger; if it is too large, the next iteration becomes smaller. On the Z80, division
-by 4 is simply a two-bit right shift, so we can repeatedly apply:
+That equation is recursive: the value we are trying to compute appears on both sides. This is useful because repeated
+iteration drives the estimate toward the unique fixed point $y = x / 3$. If the current estimate is too small, the next
+iteration increases it; if it is too large, the next iteration decreases it. On the Z80, division by 4 is simply
+a two-bit right shift, so we can repeatedly apply:
 
 `y = (x + y) >> 2`
 
-The useful part is that each iteration divides the remaining error by about 4, so the approximation improves quickly.
+The useful property is that each iteration divides the remaining error by about 4, so the approximation improves quickly.
 The iteration behaves like building the reciprocal through a geometric expansion:
 
 $1 / 3 = 1 / 4 + 1 / 16 + 1 / 64 + ...$
