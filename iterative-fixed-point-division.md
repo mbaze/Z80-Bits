@@ -10,7 +10,7 @@ emerges through successive iteration because it is a stable fixed point of the r
 
 To explain the idea, let’s consider division by 3:
 
-y = x / 3
+$y = x / 3$
 
 We can rearrange this into:
 
