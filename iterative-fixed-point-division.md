@@ -117,10 +117,9 @@ y = (x - y) >> 2
 
 The resulting routine that performs division by 5 (A = B / 5) becomes:
 ```
-ld    a,b
-srl   a
-srl   a
-ld    c,a
+ld    c,b
+srl   c
+srl   c
 ld    a,b
 sub   c
 rra
