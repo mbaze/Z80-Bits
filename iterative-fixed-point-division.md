@@ -115,29 +115,24 @@ For example, division by 5 can be implemented by repeating:
 
 y = (x - y) >> 2
 
-However, on the Z80, the expression (x - y) is not as straightforward to implement as (y + x), at least not without
-using temporary storage. Fortunately, we can rewrite the expression as (-y + x) and exploit the identity:
-
--y = ~y + 1
-
-which lets us replace arithmetic negation (`neg`) with the cheaper bitwise complement (`cpl`). The additional
-increment can be absorbed by pre-incrementing the input value before iteration begins. The resulting routine that
-performs division by 5 (A = B / 5) becomes:
+The resulting routine that performs division by 5 (A = B / 5) becomes:
 ```
 ld    a,b
-inc   b
 srl   a
 srl   a
-cpl
-add   a,b
+ld    c,a
+ld    a,b
+sub   c
 rra
 srl   a
-cpl
-add   a,b
+ld    c,a
+ld    a,b
+sub   c
 rra
 srl   a
-cpl
-add   a,b
+ld    c,a
+ld    a,b
+sub   c
 rra
 srl   a
 ```
