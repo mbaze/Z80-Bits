@@ -62,6 +62,19 @@ rra
 srl   a
 ```
 
+The method generalizes directly to wider operands. Unlike the 8-bit example above, the 16-bit routine below is presented
+in looped form for brevity:
+```
+      ld    hl,65536 / 3
+      ld    b,8
+Div3  add   hl,de
+      rr    h
+      rr    l
+      srl   h
+      rr    l
+      djnz  Div3
+```
+
 ## Generalizing the idea to divisors of the form 2^N - 1
 
 It turns out that the recursive equation has a particularly elegant form for divisors that are one less than a power of two:
