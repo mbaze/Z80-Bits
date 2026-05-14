@@ -2,11 +2,11 @@
 
 *Author: Milos "baze" Bazelides (2026-05-13)*
 
-Most Z80 division routines use some variation of restoring division: a bit-by-bit algorithm that repeatedly
-shifts, subtracts, and restores partial remainders. It is reliable and well understood, but it is not always
-the most efficient choice for certain constant divisors. Instead of constructing the quotient one bit at a time,
-the approach introduced here repeatedly refines an approximation using only additions and shifts. The quotient
-emerges through successive iteration because it is a stable fixed point of the recursive equation.
+Most Z80 division routines use some variation of restoring division: a bit-by-bit algorithm that repeatedly shifts,
+subtracts, and restores partial remainders. It is reliable and well understood, but it is not always the most efficient
+choice for certain constant divisors. Instead of constructing the quotient one bit at a time, the approach introduced
+here repeatedly refines an approximation using only additions and shifts. The quotient emerges through successive
+iteration because it is a stable fixed point of the recursive equation.
 
 To explain the idea, let’s consider division by 3:
 
@@ -36,9 +36,8 @@ The iteration behaves like building the reciprocal through a geometric expansion
 
 $1 / 3 = 1 / 4 + 1 / 16 + 1 / 64 + ...$
 
-where each pass contributes another term of the series. Even with integer truncation at each step, four iterations
-are enough to produce the correct integer quotient over the entire 8-bit range. For 16-bit inputs, eight iterations
-suffice.
+where each pass contributes another term of the series. Even with integer truncation at each step, four iterations are
+enough to produce the correct integer quotient over the entire 8-bit range. For 16-bit inputs, eight iterations suffice.
 
 One subtle issue remains: every time we shift right, we lose the fractional part of the value. This introduces a small
 downward bias which can be offset by preloading the accumulator with a carefully chosen constant. The constant shifts
@@ -106,9 +105,8 @@ For instance, division by 7 (A = B / 7) becomes:
       rra
 ```
 
-The `%11111110` mask is used because it clears the least significant bit and resets the carry flag,
-ensuring that subsequent `rra` instructions behave like chained logical shifts, which would otherwise
-require slower `srl a` operations.
+The `%11111110` mask is used because it clears the least significant bit and resets the carry flag, ensuring that
+subsequent `rra` instructions behave like chained logical shifts, which would otherwise require slower `srl a` operations.
 
 ## Divisors of the form 2^N + 1
 
@@ -120,9 +118,9 @@ Another class of elegant routines emerges for divisors that are one greater than
 ...
 ```
 
-At first glance, this looks almost identical to the addition-based recurrence of the form `y = (x + y) >> N`.
-However, there is an important difference: unlike the addition form, the truncation error now oscillates in sign,
-so the rounding bias tends to cancel out naturally and no preload constant is required.
+At first glance, this looks almost identical to the addition-based recurrence of the form `y = (x + y) >> N`. However,
+there is an important difference: unlike the addition form, the truncation error alternates in sign between iterations,
+so the rounding bias cancels out naturally and no preload constant is required.
 
 For example, division by 5 can be implemented by repeating:
 
