@@ -62,8 +62,8 @@ The resulting Z80 implementation for division by 3 (A = B / 3) is remarkably com
       srl   a
 ```
 
-The method generalizes directly to wider operands. Unlike the 8-bit example above, the 16-bit routine below is presented
-in looped form for brevity:
+The method generalizes directly to wider operands. Unlike the 8-bit example above, the 16-bit routine below (HL = DE / 3)
+is presented in looped form for brevity:
 ```
       ld    hl,65536 / 3
       ld    b,8
