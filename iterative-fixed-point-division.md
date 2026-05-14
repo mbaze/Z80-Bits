@@ -47,19 +47,19 @@ constant is floor(256 / 3). For a 16-bit dividend, it is floor(65536 / 3).
 
 The resulting Z80 implementation for division by 3 (A = B / 3) is remarkably compact:
 ```
-ld    a,256 / 3
-add   a,b
-rra
-srl   a
-add   a,b
-rra
-srl   a
-add   a,b
-rra
-srl   a
-add   a,b
-rra
-srl   a
+      ld    a,256 / 3
+      add   a,b
+      rra
+      srl   a
+      add   a,b
+      rra
+      srl   a
+      add   a,b
+      rra
+      srl   a
+      add   a,b
+      rra
+      srl   a
 ```
 
 The method generalizes directly to wider operands. Unlike the 8-bit example above, the 16-bit routine below is presented
@@ -87,23 +87,23 @@ It turns out that the recursive equation has a particularly elegant form for div
 
 For instance, division by 7 (A = B / 7) becomes:
 ```
-ld    c,%11111110
-ld    a,256 / 7
-add   a,b
-rra
-and   c
-rra
-rra
-add   a,b
-rra
-and   c
-rra
-rra
-add   a,b
-rra
-and   c
-rra
-rra
+      ld    c,%11111110
+      ld    a,256 / 7
+      add   a,b
+      rra
+      and   c
+      rra
+      rra
+      add   a,b
+      rra
+      and   c
+      rra
+      rra
+      add   a,b
+      rra
+      and   c
+      rra
+      rra
 ```
 
 The `%11111110` mask is used because it clears the least significant bit and resets the carry flag,
@@ -130,23 +130,23 @@ y = (x - y) >> 2
 
 The resulting routine that performs division by 5 (A = B / 5) becomes:
 ```
-ld    c,b
-srl   c
-srl   c
-ld    a,b
-sub   c
-rra
-srl   a
-ld    c,a
-ld    a,b
-sub   c
-rra
-srl   a
-ld    c,a
-ld    a,b
-sub   c
-rra
-srl   a
+      ld    c,b
+      srl   c
+      srl   c
+      ld    a,b
+      sub   c
+      rra
+      srl   a
+      ld    c,a
+      ld    a,b
+      sub   c
+      rra
+      srl   a
+      ld    c,a
+      ld    a,b
+      sub   c
+      rra
+      srl   a
 ```
 
 ## Closing Thoughts
