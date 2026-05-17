@@ -3,7 +3,7 @@
 *Author: Milos "baze" Bazelides (2026-05-13)*
 
 Most Z80 division routines use some variation of restoring division: a bit-by-bit algorithm that repeatedly shifts,
-subtracts, and restores partial remainders. It is reliable and well understood, but it is not always the most efficient
+subtracts, and restores partial remainders. It is reliable and well understood, but it is not always the optimal
 choice for certain constant divisors. Instead of constructing the quotient one bit at a time, the approach introduced
 here repeatedly refines an approximation using only additions and shifts. The quotient emerges through successive
 iteration because it is a stable fixed point of the recursive equation.
