@@ -42,7 +42,7 @@ enough to produce the correct integer quotient over the entire 8-bit range. For 
 One subtle issue remains: every time we shift right, we lose the fractional part of the value. This introduces a small
 downward bias which can be offset by preloading the accumulator with a carefully chosen constant. The constant shifts
 the iteration upward so that the truncated process converges to the correct result. For an 8-bit dividend, the preload
-constant is floor(256 / 3). For a 16-bit dividend, it is floor(65536 / 3).
+constant is `floor(256 / 3)`. For a 16-bit dividend, it is `floor(65536 / 3)`.
 
 The resulting Z80 implementation for division by 3 (A = B / 3) is remarkably compact:
 ```
