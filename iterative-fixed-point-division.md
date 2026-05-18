@@ -156,9 +156,6 @@ particular case, it demonstrates a useful contextual optimization:
 ```
       ld    c,255
       ld    a,b
-      and   c
-      rra
-      rra
       srl   a
       srl   a
       inc   b
