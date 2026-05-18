@@ -147,11 +147,11 @@ which leads to the following routine for A = B / 5:
       srl   a
 ```
 
-The expression $(x - y)$ is harder to implement efficiently because it requires temporary storage. However, it can be
-rewritten as `~y + (x + 1)`. The extra increment can be absorbed by pre-incrementing the input value before iteration
-begins. Furthermore, because $y$ never exceeds $x$, the bit shifted into the accumulator by `rra` is guaranteed to be
-zero. This allows `xor c` in the code below to serve a dual purpose: it both complements the accumulator and clears
-the carry flag for subsequent `rra`, producing a tighter inner loop. Although the cycle count is not reduced in this
+The expression $(x - y)$ is harder to implement efficiently because it requires temporary storage. However, it can
+be rewritten as `~y + (x + 1)`. The extra increment can be folded into the initial value before iteration begins.
+Furthermore, because $y$ never exceeds $x$, the bit shifted into the accumulator by `rra` is guaranteed to be zero.
+This allows `xor c` in the code below to serve a dual purpose: it both complements the accumulator and clears the
+carry flag for subsequent `rra`, producing a tighter inner loop. Although the cycle count is not reduced in this
 particular case, it demonstrates a useful contextual optimization:
 ```
       ld    c,255
