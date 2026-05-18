@@ -118,13 +118,15 @@ Another class of elegant routines emerges for divisors that are one greater than
 ...
 ```
 
-At first glance, this looks almost identical to the addition-based recurrence of the form `y = (x + y) >> N`. However, there is an important difference: in this case, the truncation error alternates in sign between iterations, so the rounding bias cancels out naturally and no preload constant is required.
+This resembles the addition-based recurrence of the form `y = (x + y) >> N`. However, in this case the truncation error
+alternates in sign between iterations, so the rounding bias largely cancels itself out. As a result, no preload constant
+is required.
 
-For example, division by 5 can be implemented by repeating:
+For example, division by 5 can be implemented by iterating:
 
 `y = (x - y) >> 2`
 
-The resulting routine that performs division by 5 (A = B / 5) becomes:
+which leads to the following routine for A = B / 5:
 ```
       ld    c,b
       srl   c
@@ -143,6 +145,40 @@ The resulting routine that performs division by 5 (A = B / 5) becomes:
       sub   c
       rra
       srl   a
+```
+
+The expression $(x - y)$ is harder to implement efficiently because it requires temporary storage. However, it can be
+rewritten as:
+
+`~y + (x + 1)`
+
+The extra increment can be absorbed by pre-incrementing the input value before iteration begins. Furthermore, because
+$y$ never exceeds $x$, the bit shifted into the accumulator by `rra` is guaranteed to be zero. This allows `xor c` in
+the code below to serve a dual purpose: it both complements the accumulator and clears the carry flag, producing a
+tighter inner loop. Although it does not reduce the cycle count in this particular case, it demonstrates a useful
+contextual optimization:
+```
+	ld    c,255
+	ld    a,b
+      and   c
+      rra
+      rra
+      
+      srl   a
+	srl   a
+	inc   b
+	sub   b
+	xor   c
+	rra
+	srl   a
+	sub   b
+	xor   c
+	rra
+	srl   a
+	sub   b
+	xor   c
+	rra
+	srl   a
 ```
 
 ## Closing Thoughts
