@@ -151,8 +151,8 @@ The expression $(x - y)$ is harder to implement efficiently because it requires 
 rewritten as `~y + (x + 1)`. The extra increment can be absorbed by pre-incrementing the input value before iteration
 begins. Furthermore, because $y$ never exceeds $x$, the bit shifted into the accumulator by `rra` is guaranteed to be
 zero. This allows `xor c` in the code below to serve a dual purpose: it both complements the accumulator and clears
-the carry flag, producing a tighter inner loop. Although it does not reduce the cycle count in this particular case,
-it demonstrates a useful contextual optimization:
+the carry flag for subsequent `rra`, producing a tighter inner loop. Although the cycle count is not reduced in this
+particular case, it demonstrates a useful contextual optimization:
 ```
       ld    c,255
       ld    a,b
