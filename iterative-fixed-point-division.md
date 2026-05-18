@@ -118,7 +118,7 @@ Another class of elegant routines emerges for divisors that are one greater than
 ...
 ```
 
-At first glance, this looks almost identical to the addition-based recurrence of the form `y = (x + y) >> N`. However, there is an important difference: in this case, the truncation error alternates sign between iterations, so the rounding bias cancels out naturally and no preload constant is required.
+At first glance, this looks almost identical to the addition-based recurrence of the form `y = (x + y) >> N`. However, there is an important difference: in this case, the truncation error alternates in sign between iterations, so the rounding bias cancels out naturally and no preload constant is required.
 
 For example, division by 5 can be implemented by repeating:
 
