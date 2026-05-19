@@ -6,8 +6,8 @@ The routine shown below implements a fast, table-driven, left-shifting CRC-16 on
 two 256-byte lookup tables. For each incoming data byte it performs the following operations:
 ```
 uint8_t index = input_byte ^ crc_hi;
-crc_lo = crc_table_lo[index];
 crc_hi = crc_lo ^ crc_table_hi[index];
+crc_lo = crc_table_lo[index];
 ```
 
 A traditional CRC-16 implementation processes data one bit at a time, performing up to eight
@@ -82,7 +82,7 @@ CrcNext    djnz  CrcLoop2
            ret
 ```
 
-The polynomial used is CRC-16F/4.2, taken from Philip Koopman’s excellent [CRC Polynomial Zoo]
+The polynomial used is CRC-16F/4.2, taken from Philip Koopmanâ€™s excellent [CRC Polynomial Zoo]
 (https://users.ece.cmu.edu/~koopman/crc/). It is particularly well suited to packet sizes around
 4 KiB (32768 bits), where it achieves a Hamming distance of HD = 4 up to 32751 bits of message
 length. In practice, this guarantees detection of all 1-bit, 2-bit, and 3-bit errors, while also
