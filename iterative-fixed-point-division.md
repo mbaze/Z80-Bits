@@ -74,7 +74,7 @@ Div3  add   hl,de
       djnz  Div3
 ```
 
-## Generalizing the idea to divisors of the form 2^N - 1
+## Generalizing the idea to divisors of the form $2^N - 1$
 
 It turns out that the recursive equation has a particularly elegant form for divisors that are one less than a power of two:
 ```
@@ -108,7 +108,7 @@ For instance, division by 7 (A = B / 7) becomes:
 The `%11111110` mask is used because it clears the least significant bit and resets the carry flag, ensuring that
 subsequent `rra` instructions behave like chained logical shifts, which would otherwise require slower `srl a` operations.
 
-## Divisors of the form 2^N + 1
+## Divisors of the form $2^N + 1$
 
 Another class of elegant routines emerges for divisors that are one greater than a power of two:
 ```
