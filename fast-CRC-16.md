@@ -82,10 +82,10 @@ CrcNext    djnz  CrcLoop2
            ret
 ```
 
-The polynomial used is CRC-16F/4.2, taken from Philip Koopman’s excellent [CRC Polynomial Zoo]
-(https://users.ece.cmu.edu/~koopman/crc/). It is particularly well suited to packet sizes around
-4 KiB (32768 bits), where it achieves a Hamming distance of HD = 4 up to 32751 bits of message
-length. In practice, this guarantees detection of all 1-bit, 2-bit, and 3-bit errors, while also
-providing strong burst-error detection characteristics.
+The polynomial used is CRC-16F/4.2, taken from Philip Koopman’s excellent
+[CRC Polynomial Zoo](https://users.ece.cmu.edu/~koopman/crc/). It is particularly well suited
+to packet sizes around 4 KiB (32768 bits), where it achieves a Hamming distance of HD = 4 up
+to 32751 bits of message length. In practice, this guarantees detection of all 1-bit, 2-bit,
+and 3-bit errors, while also providing strong burst-error detection characteristics.
 
 To use the standard CRC-CCITT polynomial instead, set `CRC_POLY = #1021`.
