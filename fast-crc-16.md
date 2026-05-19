@@ -13,9 +13,9 @@ crc_lo = crc_table_lo[index];
 A traditional CRC-16 implementation processes data one bit at a time, performing up to eight
 conditional `xor` operations per byte. The table-driven version accelerates this by precomputing
 the effect of all possible 8-bit inputs. The 16-bit CRC state is maintained as two 8-bit values
-(`crc_hi` and `crc_lo`), allowing the Z80 to update the CRC using only `xor`s and table lookups
-instead of performing the calculation bit by bit. In the code below, register A corresponds to
-`crc_hi` and register A' corresponds to `crc_lo`:
+`crc_hi` and `crc_lo`, allowing the Z80 to update the CRC using only `xor` operations and table
+lookups instead of performing the calculation bit by bit. In the code below, register A corresponds
+to `crc_hi` and register A' corresponds to `crc_lo`:
 ```
 ; Input:
 ; HL = input block address
