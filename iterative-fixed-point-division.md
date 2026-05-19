@@ -175,10 +175,10 @@ a useful contextual optimization:
 
 ## Closing Thoughts
 
-These routines are not replacements for general-purpose division. They are specialized iterative solvers for particular
-divisors, especially numbers near powers of two. But they represent an interesting and philosophically satisfying
-alternative to restoring division: instead of extracting quotient bits one at a time, they converge toward the quotient
-using only shifts, additions, and feedback.
+These routines are not replacements for general-purpose division. They are specialized iterative solvers for specific
+divisors, especially values near powers of two. Instead of extracting quotient bits one at a time, they converge on the
+quotient more quickly using only additions, shifts, and feedback, which makes them both efficient and philosophically
+appealing.
 
 For small divisors, the most efficient approach is often a hybrid of direct shifting and these specialized solvers.
 Powers of two are handled most efficiently with right shifts, while nearby odd divisors are good candidates for
