@@ -19,7 +19,7 @@ instead of performing the calculation bit by bit. In the code below, register A 
 ```
 ; Input:
 ; HL = input block address
-; BC = block length
+; BC = input block length
 ; DE = expected CRC
 
 ; Output:
