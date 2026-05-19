@@ -6,7 +6,7 @@ A Galois Linear Feedback Shift Register (LFSR) is a compact, Z80-friendly pseudo
 generator. Its logic maps almost directly to inexpensive CPU opcodes, and its near-uniform
 distribution makes it especially useful in demoscene productions.
 
-An $N$-bit LFSR can cycle through up to $(2^N − 1)$ unique states, provided that the feedback
+An $N$-bit LFSR can cycle through up to $2^N − 1$ unique states, provided that the feedback
 polynomial (the value `xor`ed into the register) satisfies certain mathematical properties.
 Explaining those properties is beyond the scope of this article. For example, a 16-bit LFSR
 can generate up to 65535 values before the sequence repeats. The all-zero state is invalid,
