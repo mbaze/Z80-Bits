@@ -33,8 +33,8 @@ Loop    ...
 
 The trick works because `djnz` decrements only the B register and tests it for zero. By biasing
 the initial value of BC, the `inc b` instruction compensates for the decrement performed by `djnz`,
-except when the low byte wraps around. In addition to being both shorter and faster, it also
-preserves the accumulator.
+except in cases where the correction leaves B = 1. In addition to being both shorter and faster,
+it also preserves the accumulator.
 
 One consequence is that initializing BC with values from 1 to 255 results in a single iteration.
 That means the valid iteration range becomes 1..65281 (`#FF01`) instead of the full 1..65536 range.
