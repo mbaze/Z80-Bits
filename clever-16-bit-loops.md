@@ -44,4 +44,4 @@ cheap, though:
       dec   bc
 ```
 
-To the best of my knowledge, this technique was first discovered by Pavel "Zilog" Cimbal around 2000.
+This technique was first discovered by Pavel "Zilog" Cimbal around 2000.
