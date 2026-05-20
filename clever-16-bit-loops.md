@@ -37,7 +37,7 @@ instruction compensates for this decrement, except when the correction results i
 range becomes 1..65281 (`#FF01`) instead of the full 1..65536 range. In practice, this limitation
 is rarely a problem. In addition to being shorter and faster, this method preserves the accumulator.
 
-Not all iteration counts can be biased at compile time; however, runtime biasing is extremely cheap:
+Not all iteration counts can be biased at compile time. However, runtime biasing is extremely cheap:
 ```
       inc   b
       dec   bc
