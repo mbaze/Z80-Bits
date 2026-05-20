@@ -9,7 +9,7 @@ a register pair does not affect the zero flag.
 This seemingly odd behavior comes from the Z80’s internal design. The CPU contains a dedicated
 16-bit increment/decrement unit designed primarily for updating the Program Counter (PC) and
 Stack Pointer (SP) independently of the ALU. That same hardware is also reused for operations
-on other register pairs, which is why instructions such `dec bc` leave the zero flag unaffected.
+on other register pairs, which is why instructions such as `dec bc` leave the zero flag unaffected.
 
 The traditional way to implement a 16-bit countdown loop looks like this:
 ```
@@ -31,14 +31,11 @@ Loop    ...
         djnz  Loop
 ```
 
-The trick works because `djnz` decrements only the B register and tests it for zero. By biasing
-the initial value of BC, the `inc b` instruction compensates for the decrement performed by `djnz`,
-except in cases where the correction leaves B = 1. In addition to being both shorter and faster,
-it also preserves the accumulator.
-
-One consequence is that initializing BC with values from 1 to 255 results in a single iteration.
-That means the valid iteration range becomes 1..65281 (`#FF01`) instead of the full 1..65536 range.
-In practice, this limitation is rarely a problem.
+The trick works because `djnz` decrements the B register and tests it for zero. The `inc b`
+instruction compensates for this decrement, except when the correction results in B = 1 before
+`djnz`. Consequently, the loop counter must be biased by 255. This is why the valid iteration
+range becomes 1..65281 (#FF01) instead of the full 1..65536 range. In practice, this limitation
+is rarely a problem. In addition to being both shorter and faster, it also preserves the accumulator.
 
 As far as I know, this neat trick was first discovered by Pavel "Zilog" Cimbal around the turn of
 the millennium.
