@@ -40,5 +40,5 @@ One consequence is that initializing BC with values from 1 to 255 results in a s
 That means the valid iteration range becomes 1..65281 (`#FF01`) instead of the full 1..65536 range.
 In practice, this limitation is rarely a problem.
 
-As far as I know, this neat trick was discovered by Pavel "Zilog" Cimbal around the turn of the
-millennium.
+As far as I know, this neat trick was first discovered by Pavel "Zilog" Cimbal around the turn of
+the millennium.
