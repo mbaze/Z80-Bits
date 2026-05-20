@@ -13,22 +13,22 @@ on other register pairs, which is why instructions such as `dec bc` leave the ze
 
 The traditional way to implement a 16-bit countdown loop looks like this:
 ```
-        ld    bc,COUNT
-Loop    ...
-        dec   bc
-        ld    a,b
-        or    c
-        jr    nz,Loop
+      ld    bc,COUNT
+Loop  ...
+      dec   bc
+      ld    a,b
+      or    c
+      jr    nz,Loop
 ```
 
 As it turns out, we can do better at the cost of sacrificing a tiny portion of the full iteration
 range:
 ```
-        ld    bc,COUNT + 255
-Loop    ...
-        dec   bc
-        inc   b
-        djnz  Loop
+      ld    bc,COUNT + 255
+Loop  ...
+      dec   bc
+      inc   b
+      djnz  Loop
 ```
 
 The trick works because `djnz` decrements the B register and tests it for zero. The `inc b`
