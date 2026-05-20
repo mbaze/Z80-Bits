@@ -9,7 +9,7 @@ distribution makes it especially useful in demoscene productions.
 An $N$-bit LFSR can cycle through up to $2^N − 1$ unique states, provided that the feedback
 polynomial (the value `xor`-ed into the register) satisfies certain mathematical properties. For
 example, a 16-bit LFSR can generate up to 65535 values before the sequence repeats. The all-zero
-state is invalid, since an LFSR initialized with zero will remain stuck at zero forever.
+state is invalid, since an LFSR initialized to zero will remain stuck in that state.
 
 The snippet below generates 8-bit pseudo-random values in the range 1..255, returning the next
 value in register A on each call:
