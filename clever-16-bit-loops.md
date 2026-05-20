@@ -35,9 +35,10 @@ The trick works because `djnz` decrements the B register and tests it for zero. 
 instruction compensates for this decrement, except when the correction results in B = 1 before
 `djnz`. This is why the loop counter must be biased by 255. Consequently, the valid iteration
 range becomes 1..65281 (`#FF01`) instead of the full 1..65536 range. In practice, this limitation
-is rarely a problem. In addition to being shorter and faster, this method preserves the accumulator.
+is rarely a problem. This method is shorter, faster, and preserves the contents of the accumulator.
 
-Not all iteration counts can be biased at compile time. However, runtime biasing is extremely cheap:
+Not all iteration counts, however, can be biased at compile time. Runtime biasing is extremely
+cheap, though:
 ```
       inc   b
       dec   bc
