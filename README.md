@@ -1,4 +1,4 @@
-# Z80 Bits — A curated collection of optimized Z80 routines, tricks, and programming techniques.
+# Z80 Bits - A curated collection of optimized Z80 routines, tricks, and programming techniques.
 
 Each document in this repository focuses on a single idea - whether it is a class of arithmetic
 routines, a clever optimization, or another useful programming technique. The goal is to collect
@@ -11,4 +11,4 @@ Z80 Bits is a spiritual continuation of an old [project](https://baze.sk/3sc/mis
 revived and gradually expanded and cleaned up over time. Bug fixes, optimizations, corrections,
 and contributions are always welcome.
 
-— Milos "baze" Bazelides
+*Milos "baze" Bazelides*
