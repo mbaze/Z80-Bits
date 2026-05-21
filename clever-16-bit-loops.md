@@ -6,10 +6,10 @@ Writing loops with an 8-bit counter on the Z80 is straightforward thanks to the 
 instruction. With 16-bit counters, however, things get a bit more awkward because decrementing
 a register pair does not affect the zero flag.
 
-This seemingly odd behavior comes from the Z80’s internal design. The CPU contains a dedicated
-16-bit incrementer/decrementer that bypasses the main ALU entirely. The design prioritized
-efficient updating of the Program Counter (PC) and Stack Pointer (SP) while keeping silicon area
-manageable, which is why instructions such as `dec bc` leave the zero flag unaffected.
+This seemingly odd behavior comes from the Z80’s internal architecture. The CPU contains a dedicated
+16-bit incrementer/decrementer separate from the main ALU. Its design prioritized efficient updating
+of the Program Counter (PC) and Stack Pointer (SP) without bloating hardware complexity, which is why
+instructions such as `dec bc` leave the zero flag unaffected.
 
 The traditional way to implement a 16-bit countdown loop looks like this:
 ```
