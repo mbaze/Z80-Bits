@@ -8,7 +8,7 @@ This repository is not intended as a beginner tutorial. The focus is on techniqu
 Z80 programmers. Each topic is documented in its own Markdown file for easier browsing and reference.
 
 Z80 Bits is a spiritual continuation of an old [project](https://baze.sk/3sc/misc/z80bits.html),
-revived and gradually expanded and cleaned up over time. Bug fixes, optimizations, corrections,
-and contributions are always welcome.
+revived, gradually expanded and cleaned up over time. Bug fixes, optimizations, corrections, and
+contributions are always welcome.
 
 *Milos "baze" Bazelides*
