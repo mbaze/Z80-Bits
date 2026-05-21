@@ -17,9 +17,9 @@ value in register A on each call:
 ```
 Lfsr8   ld    a,NON_ZERO_SEED
         add   a,a
-        jr    nc,NoXor
+        jr    nc,Skip
         xor   #2D
-NoXor   ld    (Lfsr8 + 1),a
+Skip    ld    (Lfsr8 + 1),a
 ```
 
 The 16-bit counterpart stores the pseudo-random value in the HL register pair and executes in
