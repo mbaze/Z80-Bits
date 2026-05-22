@@ -5,7 +5,7 @@
 The standard shift-and-add multiplication algorithm assumes every bit contributes to the number’s magnitude.
 That works perfectly for unsigned integers, but it breaks down for signed values in two’s complement form.
 If we feed a negative number directly into the algorithm, the sign bit is treated as another magnitude bit,
-corrupting the result.
+producing a wrong result.
 
 A common workaround is to first convert the operation into an unsigned multiplication problem:
 
