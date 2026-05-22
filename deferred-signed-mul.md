@@ -15,8 +15,8 @@ A common workaround is to first convert the operation into an unsigned multiplic
 4. If the recorded sign indicates the result should be negative, negate the final product.
 
 This approach works, but it adds extra bookkeeping and conditional logic around what is otherwise a simple
-algorithm. To see what such an algorithm looks like, consider the unsigned multiplication of two 8-bit values
-held in registers C and E:
+algorithm. To see what such an unsigned algorithm looks like, consider the unsigned multiplication of two 8-bit
+values held in registers C and E:
 ```
 ; Input: C = first operand, E = second operand
 ; Output: HL = product
