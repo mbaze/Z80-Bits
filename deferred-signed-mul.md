@@ -24,6 +24,7 @@ held in registers C and E:
       ld    h,c
       ld    l,0
       ld    d,l
+      ld    b,8
 Mul   add   hl,hl
       jr    nc,Skip
       add   hl,de
@@ -44,6 +45,7 @@ byte of the product:
       ld    h,c
       ld    l,0
       ld    d,l
+      ld    b,8
 Mul   add   hl,hl
       jr    nc,Skip
       add   hl,de
