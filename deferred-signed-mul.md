@@ -16,16 +16,14 @@ A common workaround is to first convert the operation into an unsigned multiplic
 
 This approach works, but it adds extra bookkeeping and conditional logic around what is otherwise a simple
 algorithm. To see what such an algorithm looks like, consider the unsigned multiplication of two 8-bit values
-stored in registers B and C:
+stored in registers C and E:
 ```
-; Input: B = first operand, C = second operand
+; Input: C = first operand, E = second operand
 ; Output: HL = product
 
-      ld    h,b
+      ld    h,c
       ld    l,0
       ld    d,l
-      ld    e,c
-      ld    b,8
 Mul   add   hl,hl
       jr    nc,Skip
       add   hl,de
@@ -40,14 +38,12 @@ A is therefore 256 * B, and the same logic applies for A if B is negative. In pr
 simple adjustment based on the sign bits: if one operand is negative, subtract the other operand from the high
 byte of the product:
 ```
-; Input: B = first operand, C = second operand
+; Input: C = first operand, E = second operand
 ; Output: HL = product
 
-      ld    h,b
+      ld    h,c
       ld    l,0
       ld    d,l
-      ld    e,c
-      ld    b,8
 Mul   add   hl,hl
       jr    nc,Skip
       add   hl,de
