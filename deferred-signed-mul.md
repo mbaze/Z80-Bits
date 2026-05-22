@@ -2,8 +2,8 @@
 
 *By Milos "baze" Bazelides*
 
-The standard shift-and-add multiplication algorithm assumes every bit contributes to the number’s magnitude.
-That works perfectly for unsigned integers, but it breaks down for signed values in two’s complement form.
+The standard shift-and-add multiplication algorithm assumes every bit contributes to the numberâ€™s magnitude.
+That works perfectly for unsigned integers, but it breaks down for signed values in twoâ€™s complement form.
 If we feed a negative number directly into the algorithm, the sign bit is treated as another magnitude bit,
 corrupting the result.
 
@@ -16,14 +16,15 @@ A common workaround is to first convert the operation into an unsigned multiplic
 
 This approach works, but it adds extra bookkeeping and conditional logic around what is otherwise a simple
 algorithm. To see what such an algorithm looks like, consider the unsigned multiplication of two 8-bit values
-stored in registers D and E:
-```asm
-; Input: D = first operand, E = second operand
+stored in registers B and C:
+```
+; Input: B = first operand, C = second operand
 ; Output: HL = product
 
-      ld    h,d
+      ld    h,b
       ld    l,0
       ld    d,l
+      ld    e,c
       ld    b,8
 Mul   add   hl,hl
       jr    nc,Skip
@@ -38,3 +39,26 @@ a sign bit is set, the multiplier overestimates that contribution by 256. The er
 A is therefore 256 * B, and the same logic applies for A if B is negative. In practice, this reduces to a very
 simple adjustment based on the sign bits: if one operand is negative, subtract the other operand from the high
 byte of the product:
+```
+; Input: B = first operand, C = second operand
+; Output: HL = product
+
+      ld    h,b
+      ld    l,0
+      ld    d,l
+      ld    e,c
+      ld    b,8
+Mul   add   hl,hl
+      jr    nc,Skip
+      add   hl,de
+Skip  djnz  Mul
+
+      ld    a,h
+      bit   7,c
+      jr    z,Fix1
+      sub   e
+Fix1  bit   7,e
+      jr    z,Fix2
+      sub   c
+Fix2  ld    h,a
+```
