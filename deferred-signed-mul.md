@@ -4,8 +4,8 @@
 
 The standard shift-and-add multiplication algorithm assumes every bit contributes to the number’s magnitude.
 That works perfectly for unsigned integers, but it breaks down for signed values in two’s complement form.
-If we feed a negative number directly into the algorithm, the sign bit is treated as another magnitude bit,
-producing a wrong result.
+If we feed a negative number directly into the algorithm, the sign bit is treated as an ordinary magnitude
+bit, producing a wrong result.
 
 A common workaround is to first convert the operation into an unsigned multiplication problem:
 
@@ -16,7 +16,7 @@ A common workaround is to first convert the operation into an unsigned multiplic
 
 This approach works, but it adds extra bookkeeping and conditional logic around what is otherwise a simple
 algorithm. To see what such an algorithm looks like, consider the unsigned multiplication of two 8-bit values
-stored in registers C and E:
+held in registers C and E:
 ```
 ; Input: C = first operand, E = second operand
 ; Output: HL = product
