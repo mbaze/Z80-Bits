@@ -1,0 +1,40 @@
+# A Deferred-Correction Approach to Signed Shift-and-Add Multiplication
+
+*By Milos "baze" Bazelides*
+
+The standard shift-and-add multiplication algorithm assumes every bit contributes to the number’s magnitude.
+That works perfectly for unsigned integers, but it breaks down for signed values in two’s complement form.
+If we feed a negative number directly into the algorithm, the sign bit is treated as another magnitude bit,
+corrupting the result.
+
+A common workaround is to first convert the operation into an unsigned multiplication problem:
+
+1. Check the signs of both operands (typically using `xor`) to determine whether the result should be negative.
+2. Convert any negative operands to their absolute values.
+3. Perform a standard unsigned shift-and-add multiplication.
+4. If the recorded sign indicates the result should be negative, negate the final product.
+
+This approach works, but it adds extra bookkeeping and conditional logic around what is otherwise a simple
+algorithm. To see what such an algorithm looks like, consider the unsigned multiplication of two 8-bit values
+stored in registers D and E:
+```asm
+; Input: D = first operand, E = second operand
+; Output: HL = product
+
+      ld    h,d
+      ld    l,0
+      ld    d,l
+      ld    b,8
+Mul   add   hl,hl
+      jr    nc,Skip
+      add   hl,de
+Skip  djnz  Mul
+```
+
+Could we avoid bookkeeping entirely and defer the correction until after the multiplication completes? The key
+intuition is that the unsigned multiplier is already almost computing the correct signed result. The only issue
+is how it interprets the most significant bit: instead of contributing -128, it contributes +128. So whenever
+a sign bit is set, the multiplier overestimates that contribution by 256. The error term introduced by a negative
+A is therefore 256 * B, and the same logic applies for A if B is negative. In practice, this reduces to a very
+simple adjustment based on the sign bits: if one operand is negative, subtract the other operand from the high
+byte of the product:
