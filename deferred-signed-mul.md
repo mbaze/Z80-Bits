@@ -1,4 +1,4 @@
-# A Deferred-Correction Approach to Signed Shift-and-Add Multiplication
+# A Deferred Approach to Signed Shift-and-Add Multiplication
 
 *By Milos "baze" Bazelides*
 
