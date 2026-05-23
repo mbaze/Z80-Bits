@@ -31,10 +31,11 @@ Mul   add   hl,hl
 Skip  djnz  Mul
 ```
 
-Could we avoid bookkeeping entirely and defer the sign correction until after the multiplication completes? Consider
-how the unsigned multiplier interprets the most significant bit: instead of contributing −128, it contributes +128.
-Whenever a sign bit is set, the multiplier overestimates its value by 256. The error term introduced by a negative A
-is therefore 256 * B, and the same logic applies to A when B is negative.
+Could we avoid bookkeeping entirely and defer the sign correction until after the multiplication completes?
+The key insight is that signed multiplication can be viewed as unsigned multiplication with a predictable error
+term. Consider how the unsigned multiplier interprets the most significant bit: instead of contributing −128,
+it contributes +128. Whenever a sign bit is set, the multiplier overestimates its value by 256. The error term
+introduced when A is negative is therefore 256 * B, and similar logic applies when B is negative.
 
 In practice, this reduces to a very simple adjustment based on the sign bits: if one operand is negative, subtract the
 other operand from the high byte of the product:
