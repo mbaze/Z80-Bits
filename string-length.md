@@ -10,8 +10,8 @@ The trick is that if we initialize BC to zero, `cpir` produces the negative stri
 which can be negated afterward. If the terminating zero should not be included in the count, it is enough
 to omit `scf` from the following code:
 ```
-Input: HL = string address
-Output: HL = string length
+; Input: HL = string address
+; Output: HL = string length
 
       xor   a
       ld    b,a
@@ -26,8 +26,8 @@ Output: HL = string length
 On 8-bit systems, especially when dealing with user input or shorter messages, we can often assume a maximum
 string length of 256 bytes. Under that assumption, the routine becomes remarkably compact:
 ```
-Input: HL = string address
-Output: A = string length
+; Input: HL = string address
+; Output: A = string length
 
       xor   a
       ld    c,a
