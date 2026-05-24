@@ -23,8 +23,9 @@ to omit `scf` from the following code:
       sbc   hl,bc
 ```
 
-On 8-bit systems, especially when dealing with user input or shorter messages, we can often assume a maximum
-string length of 255 bytes. Under that assumption, the routine becomes remarkably compact:
+On 8-bit systems, especially when dealing with user input or shorter messages, we can often
+assume that strings are at most 255 bytes long, including the terminating zero. Under that
+assumption, the routine becomes even more compact:
 ```
 ; Input: HL = string address
 ; Output: A = string length
