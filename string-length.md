@@ -37,4 +37,4 @@ assumption, the routine becomes even more compact:
       dec   a
 ```
 
-If the terminating zero should not be counted, we simply omit `dec a`.
+To exclude the terminating zero from the count, simply omit `dec a`.
